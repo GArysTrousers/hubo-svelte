@@ -1,55 +1,17 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import type { HubLink } from "$lib/interfaces";
+  import { links } from "$lib/links";
+  import { overflowX, overflowY, getActiveLinks } from "$lib/helpers";
   import LinkButton from "$lib/components/LinkButton.svelte";
-
-  let links: HubLink[] = [
-    {
-      label: "Emby",
-      url: "http://emby.garystrousers.com",
-      img: "/img/emby.png",
-    },
-    {
-      label: "Netflix",
-      url: "http://www.netflix.com/WiHome",
-      img: "/img/netflix.png",
-    },
-    {
-      label: "Stan",
-      url: "https://www.stan.com.au/",
-      img: "/img/stan.png",
-    },
-    {
-      label: "YouTube",
-      url: "https://www.youtube.com/",
-      img: "/img/youtube.png",
-    },
-    {
-      label: "ABC iView",
-      url: "https://iview.abc.net.au/",
-      img: "/img/abc.png",
-    },
-    {
-      label: "Seven Plus",
-      url: "https://7plus.com.au/",
-      img: "/img/seven.png",
-    },
-    {
-      label: "Nine Now",
-      url: "https://www.9now.com.au/",
-      img: "/img/nine.png",
-    },
-    {
-      label: "Ten Play",
-      url: "https://10play.com.au/",
-      img: "/img/ten.png",
-    },
-  ];
 
   let curIndex = -1;
 
   let colNum = 4;
   let ready = false;
+  let disabled = [3];
+  $: activeLinks = getActiveLinks(links, disabled);
+
   onMount(() => (ready = true));
 
   function onKeydown(e) {
@@ -67,26 +29,6 @@
       curIndex = overflowY(curIndex - colNum, links.length, colNum);
     }
   }
-
-  function overflowX(input: number, length: number): number {
-    if (input > length - 1) {
-      return input - length;
-    } else if (input < 0) {
-      return input + length;
-    }
-    return input;
-  }
-
-  function overflowY(input: number, length: number, colNum: number): number {
-    if (input > length - 1) {
-      return input - (input - (input % colNum));
-    } else if (input < -(colNum - (length % colNum))) {
-      return input + length + (colNum - (length % colNum));
-    } else if (input < 0) {
-      return input + length - (length % colNum);
-    }
-    return input;
-  }
 </script>
 
 <svelte:window on:keydown={onKeydown} />
@@ -94,7 +36,7 @@
 <main>
   <div class="links">
     {#if ready}
-      {#each links as link, i}
+      {#each activeLinks as link, i}
         <LinkButton {link} index={i} bind:curIndex />
       {/each}
     {/if}
@@ -105,6 +47,8 @@
   >♥ Donate to my Ko-Fi ♥</a
 >
 
+<a class="edit-link" href="edit">Edit</a>
+
 <style>
   main {
     display: flex;
@@ -114,6 +58,7 @@
     padding: 2rem;
     height: 90vh;
   }
+  
   .donate-link {
     position: fixed;
     bottom: 0;
@@ -123,6 +68,16 @@
     text-decoration: underline;
     color: #888;
   }
+
+  .edit-link {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    margin: 1rem;
+    text-decoration: underline;
+    color: #888;
+  }
+
   .links {
     --cols: 2;
     display: grid;
