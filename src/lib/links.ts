@@ -1,7 +1,10 @@
 
 import type { HubLink } from "$lib/interfaces";
+import { writable } from 'svelte/store';
 
-export let links: HubLink[] = [
+export const links = writable([]);
+
+export let defaultLinks: HubLink[] = [
   {
     label: "Emby",
     url: "http://emby.garystrousers.com",
@@ -29,7 +32,7 @@ export let links: HubLink[] = [
   {
     label: "ABC iView",
     url: "https://iview.abc.net.au/",
-    img: "/img/abc.png",
+    img: "/img/abc.svg",
     visible: true,
   },
   {
@@ -41,7 +44,7 @@ export let links: HubLink[] = [
   {
     label: "Nine Now",
     url: "https://www.9now.com.au/",
-    img: "/img/nine.png",
+    img: "/img/nine.svg",
     visible: true,
   },
   {
@@ -54,6 +57,19 @@ export let links: HubLink[] = [
     label: "SBS On Demand",
     url: "https://www.sbs.com.au/ondemand/",
     img: "/img/sbs.png",
-    visible: true,
+    visible: false,
+  },
+  {
+    label: "Kayo",
+    url: "https://kayosports.com.au/browse",
+    img: "/img/kayo.svg",
+    visible: false,
+  },
+  {
+    label: "Funimation",
+    url: "https://www.funimation.com/account/#history",
+    img: "/img/funimation.svg",
+    visible: false,
   },
 ];
+

@@ -27,7 +27,13 @@ a {
   display: flex;
   align-items: center;
   vertical-align: middle;
-  curser: pointer;
+  cursor: pointer;
+}
+.btn:hover {
+  filter: brightness(1.1);
+}
+.btn:active {
+  filter: brightness(0.9);
 }
 
 .btn-icon {

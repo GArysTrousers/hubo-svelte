@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { links } from "$lib/links";
+  import { links, defaultLinks } from "$lib/links";
   import LinkEditButton from "$lib/components/LinkEditButton.svelte";
 import { goto } from "$app/navigation";
 
@@ -8,11 +8,17 @@ import { goto } from "$app/navigation";
 
   let ready = false;
 
-  onMount(() => (ready = true));
+  onMount(() => {
+    ready = true
+  });
 
   async function save() {
-    window.localStorage.setItem("savedLinks", JSON.stringify(links))
+    window.localStorage.setItem("savedLinks", JSON.stringify($links))
     goto("/")
+  }
+
+  async function reset() {
+    $links = defaultLinks;
   }
 
 </script>
@@ -20,15 +26,21 @@ import { goto } from "$app/navigation";
 <main>
   <div class="links">
     {#if ready}
-      {#each links as link, i}
+      {#each $links as link}
         <LinkEditButton {link} bind:enabled={link.visible}/>
       {/each}
     {/if}
   </div>
-  <button class="btn btn-icon" on:click={save}>
-    <div class="material-icons">save</div>
-    <div>Save</div>
-  </button>
+  <div class="controls">
+    <button class="btn btn-icon" on:click={reset}>
+      <div class="material-icons">refresh</div>
+      <div>Reset</div>
+    </button>
+    <button class="btn btn-icon" on:click={save}>
+      <div class="material-icons">save</div>
+      <div>Save</div>
+    </button>
+  </div>
 </main>
 
 <a class="donate-link" href="https://ko-fi.com/ben_lee"
@@ -66,5 +78,11 @@ import { goto } from "$app/navigation";
     --cols: 4;
       max-width: 800px;
     }
+  }
+
+  .controls {
+    display:flex;
+    flex-direction: row;
+    gap: 1rem;
   }
 </style>
