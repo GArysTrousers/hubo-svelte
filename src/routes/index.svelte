@@ -2,15 +2,13 @@
   import { onMount } from "svelte";
   import type { HubLink } from "$lib/interfaces";
   import { links } from "$lib/links";
-  import { overflowX, overflowY, getActiveLinks } from "$lib/helpers";
+  import { overflowX, overflowY } from "$lib/helpers";
   import LinkButton from "$lib/components/LinkButton.svelte";
 
   let curIndex = -1;
 
   let colNum = 4;
   let ready = false;
-  let disabled = [3];
-  $: activeLinks = getActiveLinks(links, disabled);
 
   onMount(() => (ready = true));
 
@@ -36,7 +34,7 @@
 <main>
   <div class="links">
     {#if ready}
-      {#each activeLinks as link, i}
+      {#each links.filter((l) => l.visible == true) as link, i}
         <LinkButton {link} index={i} bind:curIndex />
       {/each}
     {/if}

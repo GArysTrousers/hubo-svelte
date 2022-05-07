@@ -18,10 +18,3 @@ export function overflowY(input: number, length: number, colNum: number): number
   }
   return input;
 }
-
-
-export function getActiveLinks(links, disabled): HubLink[] {
-  return links.filter((link, i) => {
-    return !disabled.includes(i)
-  });
-}
