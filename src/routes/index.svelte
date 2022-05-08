@@ -1,23 +1,40 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import type { HubLink } from "$lib/interfaces";
-  import { links, defaultLinks } from "$lib/links";
+  import { defaultLinks } from "$lib/links";
+  import { links } from "$lib/stores";
   import { overflowX, overflowY } from "$lib/helpers";
   import LinkButton from "$lib/components/LinkButton.svelte";
+import Tag from "$lib/components/Tag.svelte";
 
   let curIndex = -1;
 
   let colNum = 4;
   let ready = false;
+  let showNewLinks = false;
 
   onMount(() => {
     $links = JSON.parse(window.localStorage.getItem("savedLinks"));
     if ($links == null) {
       $links = defaultLinks;
       window.localStorage.setItem("savedLinks", JSON.stringify($links));
+    } else {
+      updateLinks();
     }
     ready = true;
   });
+
+  function updateLinks() {
+    var keys = $links.map((i) => i.label);
+    defaultLinks.forEach((i) => {
+      if (!keys.includes(i.label)) {
+        let newLink = i;
+        newLink.visible = false;
+        $links = [...$links, newLink];
+        showNewLinks = true;
+      }
+    });
+    if (showNewLinks) window.localStorage.setItem("savedLinks", JSON.stringify($links));
+  }
 
   function onKeydown(e) {
     if (curIndex == -1) {
@@ -53,9 +70,17 @@
     >♥ Donate to my Ko-Fi ♥</a
   >
 </div>
-<a class="edit-link" href="edit" title="Edit Links" tabindex="-1">
-  <div class="material-icons">edit</div>
-</a>
+<div class="edit-div">
+  {#if showNewLinks}
+     <Tag>
+       <div class="material-icons">star</div>
+       New Links
+     </Tag>
+  {/if}
+  <a class="edit-link" href="edit" title="Edit Links" tabindex="-1">
+    <div class="material-icons">edit</div>
+  </a>
+</div>
 
 <style>
   main {
@@ -80,15 +105,18 @@
     color: #888;
   }
 
-  .edit-link {
+  .edit-div {
     position: fixed;
     bottom: 0;
     right: 0;
-    margin: 1rem;
-    color: #888;
     display: flex;
+    flex-direction: row;
     align-items: center;
     vertical-align: middle;
+  }
+  .edit-link {
+    margin: 1rem;
+    color: #888;
   }
 
   .links {
@@ -104,4 +132,5 @@
       max-width: 800px;
     }
   }
+
 </style>

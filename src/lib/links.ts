@@ -1,8 +1,5 @@
 
 import type { HubLink } from "$lib/interfaces";
-import { writable } from 'svelte/store';
-
-export const links = writable([]);
 
 export let defaultLinks: HubLink[] = [
   {

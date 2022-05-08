@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { links, defaultLinks } from "$lib/links";
+  import { defaultLinks } from "$lib/links";
+  import { links } from "$lib/stores";
   import LinkEditButton from "$lib/components/LinkEditButton.svelte";
   import { goto } from "$app/navigation";
 
