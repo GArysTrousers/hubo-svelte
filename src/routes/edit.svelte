@@ -2,36 +2,36 @@
   import { onMount } from "svelte";
   import { links, defaultLinks } from "$lib/links";
   import LinkEditButton from "$lib/components/LinkEditButton.svelte";
-import { goto } from "$app/navigation";
-
-  
-
-  let ready = false;
+  import { goto } from "$app/navigation";
 
   onMount(() => {
-    ready = true
+    $links = JSON.parse(window.localStorage.getItem("savedLinks"));
+    if ($links != null) return;
+    $links = defaultLinks;
+    window.localStorage.setItem("savedLinks", JSON.stringify($links));
   });
 
   async function save() {
-    window.localStorage.setItem("savedLinks", JSON.stringify($links))
-    goto("/")
+    window.localStorage.setItem("savedLinks", JSON.stringify($links));
+    goto("/");
   }
 
   async function reset() {
     $links = defaultLinks;
   }
-
 </script>
 
 <main>
   <div class="links">
-    {#if ready}
-      {#each $links as link}
-        <LinkEditButton {link} bind:enabled={link.visible}/>
-      {/each}
-    {/if}
+    {#each $links as link}
+      <LinkEditButton {link} bind:enabled={link.visible} />
+    {/each}
   </div>
   <div class="controls">
+    <button class="btn btn-icon" on:click={() => goto("/")}>
+      <div class="material-icons">arrow_back</div>
+      <div>Back</div>
+    </button>
     <button class="btn btn-icon" on:click={reset}>
       <div class="material-icons">refresh</div>
       <div>Reset</div>
@@ -75,13 +75,13 @@ import { goto } from "$app/navigation";
 
   @media only screen and (min-width: 600px) {
     .links {
-    --cols: 4;
+      --cols: 4;
       max-width: 800px;
     }
   }
 
   .controls {
-    display:flex;
+    display: flex;
     flex-direction: row;
     gap: 1rem;
   }

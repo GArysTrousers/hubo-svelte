@@ -71,5 +71,11 @@ export let defaultLinks: HubLink[] = [
     img: "/img/funimation.svg",
     visible: false,
   },
+  {
+    label: "Disney Plus",
+    url: "https://www.disneyplus.com/",
+    img: "/img/disney.svg",
+    visible: false,
+  },
 ];
 
