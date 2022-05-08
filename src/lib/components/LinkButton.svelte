@@ -42,8 +42,9 @@
   }
 
   .label {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     padding: 1rem 0.5rem;
     padding-bottom: 0;
+    text-align: center;
   }
 </style>
