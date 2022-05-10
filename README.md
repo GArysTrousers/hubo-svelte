@@ -13,3 +13,4 @@ A remake of my hubo concept made in sveltkit
 - Remake all icons as svg
 - Save config to url 
 - Point out the edit button until it's pressed
+- Reorder links in the dashboard
