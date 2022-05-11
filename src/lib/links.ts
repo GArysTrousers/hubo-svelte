@@ -5,25 +5,25 @@ export let defaultLinks: HubLink[] = [
   {
     label: "Emby",
     url: "http://emby.garystrousers.com",
-    img: "/img/emby.png",
+    img: "/img/emby.svg",
     visible: true,
   },
   {
     label: "Netflix",
     url: "http://www.netflix.com/WiHome",
-    img: "/img/netflix.png",
+    img: "/img/netflix.svg",
     visible: true,
   },
   {
     label: "Stan",
     url: "https://www.stan.com.au/",
-    img: "/img/stan.png",
+    img: "/img/stan.svg",
     visible: true,
   },
   {
     label: "YouTube",
     url: "https://www.youtube.com/",
-    img: "/img/youtube.png",
+    img: "/img/youtube.svg",
     visible: true,
   },
   {
@@ -35,7 +35,7 @@ export let defaultLinks: HubLink[] = [
   {
     label: "Seven Plus",
     url: "https://7plus.com.au/",
-    img: "/img/seven.png",
+    img: "/img/seven.svg",
     visible: true,
   },
   {
@@ -47,13 +47,13 @@ export let defaultLinks: HubLink[] = [
   {
     label: "Ten Play",
     url: "https://10play.com.au/",
-    img: "/img/ten.png",
+    img: "/img/ten.svg",
     visible: true,
   },
   {
     label: "SBS On Demand",
     url: "https://www.sbs.com.au/ondemand/",
-    img: "/img/sbs.png",
+    img: "/img/sbs.svg",
     visible: false,
   },
   {
