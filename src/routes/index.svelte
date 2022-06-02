@@ -1,40 +1,19 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { defaultLinks } from "$lib/links";
-  import { links } from "$lib/stores";
+  import { links, newLinks } from "$lib/stores";
   import { overflowX, overflowY } from "$lib/helpers";
   import LinkButton from "$lib/components/LinkButton.svelte";
-import Tag from "$lib/components/Tag.svelte";
+  import Tag from "$lib/components/Tag.svelte";
+  import { goto } from "$app/navigation";
 
   let curIndex = -1;
 
   let colNum = 4;
   let ready = false;
-  let showNewLinks = false;
 
   onMount(() => {
-    $links = JSON.parse(window.localStorage.getItem("savedLinks"));
-    if ($links == null) {
-      $links = defaultLinks;
-      window.localStorage.setItem("savedLinks", JSON.stringify($links));
-    } else {
-      updateLinks();
-    }
     ready = true;
   });
-
-  function updateLinks() {
-    var keys = $links.map((i) => i.label);
-    defaultLinks.forEach((i) => {
-      if (!keys.includes(i.label)) {
-        let newLink = i;
-        newLink.visible = false;
-        $links = [...$links, newLink];
-        showNewLinks = true;
-      }
-    });
-    if (showNewLinks) window.localStorage.setItem("savedLinks", JSON.stringify($links));
-  }
 
   function onKeydown(e) {
     if (curIndex == -1) {
@@ -49,6 +28,8 @@ import Tag from "$lib/components/Tag.svelte";
       curIndex = overflowY(curIndex + colNum, $links.length, colNum);
     } else if (e.code == "ArrowUp") {
       curIndex = overflowY(curIndex - colNum, $links.length, colNum);
+    } else if (e.code == "Enter") {
+      goto($links[curIndex].url);
     }
   }
 </script>
@@ -71,7 +52,7 @@ import Tag from "$lib/components/Tag.svelte";
   >
 </div>
 <div class="edit-div">
-  {#if showNewLinks}
+  {#if $newLinks}
      <Tag>
        <div class="material-icons">star</div>
        New Links

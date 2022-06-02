@@ -5,13 +5,6 @@
   import LinkEditButton from "$lib/components/LinkEditButton.svelte";
   import { goto } from "$app/navigation";
 
-  onMount(() => {
-    $links = JSON.parse(window.localStorage.getItem("savedLinks"));
-    if ($links != null) return;
-    $links = defaultLinks;
-    window.localStorage.setItem("savedLinks", JSON.stringify($links));
-  });
-
   async function save() {
     window.localStorage.setItem("savedLinks", JSON.stringify($links));
     goto("/");
@@ -70,14 +63,14 @@
     --cols: 2;
     display: grid;
     grid-template-columns: repeat(var(--cols), 1fr);
-    gap: 2rem;
+    gap: 1rem;
     margin-bottom: 2rem;
   }
 
   @media only screen and (min-width: 600px) {
     .links {
       --cols: 4;
-      max-width: 800px;
+      max-width: 1000px;
     }
   }
 

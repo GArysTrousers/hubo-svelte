@@ -8,6 +8,8 @@ A remake of my hubo concept made in sveltkit
 - Lets you know when new links arrive
 
 # Futures
+- Option: Hide/Show labels
+- Option: Number of columns
 - Themes
 - Custom links
 - Remake all icons as svg

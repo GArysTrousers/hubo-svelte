@@ -1,7 +1,6 @@
 <script lang="ts">
   import type { HubLink } from "$lib/interfaces";
-import Checkbox from "./Checkbox.svelte";
-import Switch from "./Switch.svelte";
+  import Switch from "./Switch.svelte";
 
   export let link: HubLink;
   export let enabled: boolean;
@@ -17,7 +16,7 @@ import Switch from "./Switch.svelte";
 <style>
   .card {
     display: flex;
-    flex-flow: row;
+    flex-flow: column;
     justify-content: center;
     align-items: center;
     background-color: var(--back-2);
@@ -31,7 +30,7 @@ import Switch from "./Switch.svelte";
   }
   img {
     display: block;
-    height: 2rem;
+    height: 3rem;
     object-fit: scale-down;
   }
 </style>
