@@ -1,12 +1,13 @@
 <script lang="ts">
   import { defaultLinks } from "$lib/links";
-  import { links, newLinks } from "$lib/stores";
+  import { links, newLinks, newUser } from "$lib/stores";
   import { onMount } from "svelte";
 
   onMount(async () => {
     $links = JSON.parse(window.localStorage.getItem("savedLinks"));
     if ($links == null) {
       $links = defaultLinks;
+      $newUser = true;
       window.localStorage.setItem("savedLinks", JSON.stringify($links));
     } else {
       updateLinks();

@@ -1,9 +1,13 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { defaultLinks } from "$lib/links";
-  import { links } from "$lib/stores";
+  import { links, newUser } from "$lib/stores";
   import LinkEditButton from "$lib/components/LinkEditButton.svelte";
   import { goto } from "$app/navigation";
+
+  onMount(() => {
+    $newUser = false;
+  })
 
   async function save() {
     window.localStorage.setItem("savedLinks", JSON.stringify($links));
@@ -18,7 +22,7 @@
 <main>
   <div class="links">
     {#each $links as link}
-      <LinkEditButton {link} bind:enabled={link.visible} />
+      <LinkEditButton bind:link={link} bind:enabled={link.visible} />
     {/each}
   </div>
   <div class="controls">
@@ -35,11 +39,11 @@
       <div>Save</div>
     </button>
   </div>
+  <a class="donate-link" href="https://ko-fi.com/ben_lee"
+    >♥ Donate to my Ko-Fi ♥</a
+  >
 </main>
 
-<a class="donate-link" href="https://ko-fi.com/ben_lee"
-  >♥ Donate to my Ko-Fi ♥</a
->
 
 <style>
   main {
@@ -48,11 +52,9 @@
     justify-content: center;
     align-items: center;
     padding: 2rem;
-    height: 90vh;
+    min-height: 90vh;
   }
   .donate-link {
-    position: fixed;
-    bottom: 0;
     width: 100%;
     text-align: center;
     margin: 1rem;

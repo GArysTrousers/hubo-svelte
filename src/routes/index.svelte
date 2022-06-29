@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { links, newLinks } from "$lib/stores";
+  import { links, newLinks, newUser } from "$lib/stores";
   import { overflowX, overflowY } from "$lib/helpers";
   import LinkButton from "$lib/components/LinkButton.svelte";
   import Tag from "$lib/components/Tag.svelte";
@@ -52,11 +52,16 @@
   >
 </div>
 <div class="edit-div">
-  {#if $newLinks}
-     <Tag>
-       <div class="material-icons">star</div>
-       New Links
-     </Tag>
+  {#if $newUser}
+    <Tag>
+      <div class="material-icons">star</div>
+      You can edit the links here!
+    </Tag>
+  {:else if $newLinks}
+    <Tag>
+      <div class="material-icons">star</div>
+      New Links
+    </Tag>
   {/if}
   <a class="edit-link" href="edit" title="Edit Links" tabindex="-1">
     <div class="material-icons">edit</div>
@@ -99,7 +104,9 @@
     margin: 1rem;
     color: #888;
   }
-
+  .edit-link:hover {
+    filter: brightness(1.2);
+  }
   .links {
     --cols: 2;
     display: grid;
@@ -113,5 +120,4 @@
       max-width: 800px;
     }
   }
-
 </style>
