@@ -29,11 +29,12 @@
 </script>
 
 <svelte:head>
-  <title>Hubo.tv</title>
+  <title>Hubo</title>
   <link
     rel="stylesheet"
     href="https://fonts.googleapis.com/icon?family=Material+Icons"
   />
+  <link rel="icon" href="icon.svg">
 </svelte:head>
 
 <slot />
