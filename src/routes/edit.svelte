@@ -62,14 +62,24 @@
     color: #888;
   }
   .links {
-    --cols: 2;
+    --cols: 1;
     display: grid;
     grid-template-columns: repeat(var(--cols), 1fr);
-    gap: 1rem;
+    gap: 0.8rem;
     margin-bottom: 2rem;
+    width: 100%
   }
 
+  /* desktop */
   @media only screen and (min-width: 600px) {
+    .links {
+      --cols: 3;
+      max-width: 1000px;
+    }
+  }
+
+  /* desktop */
+  @media only screen and (min-width: 800px) {
     .links {
       --cols: 4;
       max-width: 1000px;
