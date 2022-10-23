@@ -74,5 +74,11 @@ export let defaultLinks: HubLink[] = [
     img: "/img/disney.svg",
     visible: false,
   },
+  {
+    label: "BritBox",
+    url: "https://www.britbox.com/au/",
+    img: "/img/britbox.svg",
+    visible: false,
+  },
 ];
 
