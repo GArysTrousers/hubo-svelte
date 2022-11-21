@@ -4,10 +4,11 @@
   import { links, newUser } from "$lib/stores";
   import LinkEditButton from "$lib/components/LinkEditButton.svelte";
   import { goto } from "$app/navigation";
+  import type { Catagory, HubLink } from "$lib/interfaces";
 
   onMount(() => {
     $newUser = false;
-  })
+  });
 
   async function save() {
     window.localStorage.setItem("savedLinks", JSON.stringify($links));
@@ -17,12 +18,31 @@
   async function reset() {
     $links = defaultLinks;
   }
+
+  function byCatagory(list: HubLink[], catagory: Catagory) {
+    return list.filter((v) => v.catagory == catagory);
+  }
 </script>
 
 <main>
+  <div>Movies and Series</div>
   <div class="links">
-    {#each $links as link}
-      <LinkEditButton bind:link={link} bind:enabled={link.visible} />
+    {#each byCatagory($links, "Movies and Series") as link}
+      <LinkEditButton bind:link bind:enabled={link.visible} />
+    {/each}
+  </div>
+
+  <div>TV Channels</div>
+  <div class="links">
+    {#each byCatagory($links, "TV Channels") as link}
+      <LinkEditButton bind:link bind:enabled={link.visible} />
+    {/each}
+  </div>
+
+  <div>Sport</div>
+  <div class="links">
+    {#each byCatagory($links, "Sport") as link}
+      <LinkEditButton bind:link bind:enabled={link.visible} />
     {/each}
   </div>
   <div class="controls">
@@ -44,7 +64,6 @@
   >
 </main>
 
-
 <style>
   main {
     display: flex;
@@ -53,6 +72,7 @@
     align-items: center;
     padding: 2rem;
     min-height: 90vh;
+    gap: 1rem;
   }
   .donate-link {
     width: 100%;
@@ -67,7 +87,7 @@
     grid-template-columns: repeat(var(--cols), 1fr);
     gap: 0.8rem;
     margin-bottom: 2rem;
-    width: 100%
+    width: 100%;
   }
 
   /* desktop */
