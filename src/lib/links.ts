@@ -35,7 +35,7 @@ export let defaultLinks: HubLink[] = [
     url: "https://iview.abc.net.au/",
     img: "/img/abc.svg",
     visible: true,
-    catagory: "Movies and Series",
+    catagory: "TV Channels",
   },
   {
     label: "Seven Plus",
