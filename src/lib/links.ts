@@ -93,5 +93,12 @@ export let defaultLinks: HubLink[] = [
     visible: false,
     catagory: "Movies and Series",
   },
+  {
+    label: "Paramount+",
+    url: "https://www.paramountplus.com/",
+    img: "/img/paramount.svg",
+    visible: false,
+    catagory: "Movies and Series",
+  },
 ];
 
