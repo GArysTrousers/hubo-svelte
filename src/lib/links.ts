@@ -87,6 +87,13 @@ export let defaultLinks: HubLink[] = [
     catagory: "Movies and Series",
   },
   {
+    label: "Amazon Prime",
+    url: "https://www.primevideo.com/",
+    img: "/img/primevideo.svg",
+    visible: false,
+    catagory: "Movies and Series",
+  },
+  {
     label: "BritBox",
     url: "https://www.britbox.com/au/",
     img: "/img/britbox.svg",
