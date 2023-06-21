@@ -4,7 +4,7 @@ import type { HubLink } from "$lib/interfaces";
 export let defaultLinks: HubLink[] = [
   {
     label: "Emby",
-    url: "http://emby.garystrousers.com",
+    url: "http://emby.hubo.tv",
     img: "/img/emby.svg",
     visible: true,
     catagory: "Movies and Series",
